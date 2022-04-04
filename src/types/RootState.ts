@@ -1,4 +1,3 @@
-import { GithubRepoFormState } from 'app/pages/HomePage/Features/GithubRepoForm/slice/types';
 import { ThemeState } from 'styles/theme/slice/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
@@ -8,8 +7,9 @@ import { ThemeState } from 'styles/theme/slice/types';
   Properties are optional because they are injected when the components are mounted sometime in your application's life. 
   So, not available always
 */
+
+import { AccountState } from '../app/slice/account/type';
 export interface RootState {
   theme?: ThemeState;
-  githubRepoForm?: GithubRepoFormState;
-  // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
+  account: AccountState;
 }

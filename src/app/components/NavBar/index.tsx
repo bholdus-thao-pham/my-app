@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Logo } from './Logo';
 import { StyleConstants } from 'styles/StyleConstants';
-import { Nav } from './Nav';
 import { PageWrapper } from '../PageWrapper';
 
 export function NavBar() {
@@ -10,7 +9,6 @@ export function NavBar() {
     <Wrapper>
       <PageWrapper>
         <Logo />
-        <Nav />
       </PageWrapper>
     </Wrapper>
   );
@@ -23,7 +21,7 @@ const Wrapper = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: ${p => p.theme.background};
+  background-color: pink;
   z-index: 2;
 
   @supports (backdrop-filter: blur(10px)) {

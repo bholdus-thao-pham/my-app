@@ -28,6 +28,11 @@ import reportWebVitals from 'reportWebVitals';
 
 // Initialize languages
 import './locales/i18n';
+import Web3ContextProvider from 'app/Web3';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
 // the index.html file and this observer)
@@ -39,17 +44,23 @@ openSansObserver.load().then(() => {
 });
 
 const store = configureAppStore();
+
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
+    {/* <PersistGate loading={null} persistor={persistor}> */}
     <ThemeProvider>
       <HelmetProvider>
         <React.StrictMode>
-          <App />
+          <Web3ContextProvider>
+            <ToastContainer />
+            <App />
+          </Web3ContextProvider>
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>
+    {/* </PersistGate> */}
   </Provider>,
   MOUNT_NODE,
 );

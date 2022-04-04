@@ -1,29 +1,22 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
+import { styled } from '@stitches/react';
 
 export function Logo() {
   return (
     <Wrapper>
-      <Title>React Boilerplate</Title>
-      <Description>Create React App Template</Description>
+      <Title>Logo</Title>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
+export const Wrapper = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+});
 
-const Title = styled.div`
-  font-size: 1.25rem;
-  color: ${p => p.theme.text};
-  font-weight: bold;
-  margin-right: 1rem;
-`;
-
-const Description = styled.div`
-  font-size: 0.875rem;
-  color: ${p => p.theme.textSecondary};
-  font-weight: normal;
-`;
+const Title = styled('div', {
+  fontSize: '1.25rem',
+  color: 'white',
+  fontWeight: 'bold',
+  marginRight: '1rem',
+});

@@ -1,12 +1,26 @@
-import {
-  configureStore,
-  getDefaultMiddleware,
-  StoreEnhancer,
-} from '@reduxjs/toolkit';
+import { configureStore, StoreEnhancer } from '@reduxjs/toolkit';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
+import storage from 'redux-persist/lib/storage';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist';
 
 import { createReducer } from './reducers';
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  whitelist: ['account'],
+  storage,
+};
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -23,13 +37,19 @@ export function configureAppStore() {
     }),
   ] as StoreEnhancer[];
 
+  const persistedReducer = persistReducer(persistConfig, createReducer());
+
   const store = configureStore({
-    reducer: createReducer(),
-    middleware: [...getDefaultMiddleware(), ...middlewares],
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(middlewares),
     devTools:
       /* istanbul ignore next line */
-      process.env.NODE_ENV !== 'production' ||
-      process.env.PUBLIC_URL.length > 0,
+      process.env.NODE_ENV !== 'production',
     enhancers,
   });
 

@@ -1,25 +1,38 @@
-import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { NavBar } from 'app/components/NavBar';
-import { Masthead } from './Masthead';
-import { Features } from './Features';
 import { PageWrapper } from 'app/components/PageWrapper';
+import ListAccount from './ListAccount';
+import TransferPopup from './TransferPopup';
+import { useCallback, useState } from 'react';
+import { KeyringAddress } from '@polkadot/ui-keyring/types';
 
-export function HomePage() {
+export const HomePage = () => {
+  console.log('Render Home page');
+  const [selectedAccount, setSelectedAccount] = useState<KeyringAddress>(
+    {} as KeyringAddress,
+  );
+  const [isOpen, setIsOpen] = useState(false);
+  const closePopup = () => {
+    setIsOpen(false);
+  };
+
+  const openPopupTransafer = useCallback(
+    (item: KeyringAddress) => {
+      setSelectedAccount(item);
+      setIsOpen(true);
+    },
+    [setIsOpen],
+  );
   return (
     <>
+      {isOpen && (
+        <TransferPopup sender={selectedAccount} closePopup={closePopup} />
+      )}
       <Helmet>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <title>Muc page</title>
       </Helmet>
-      <NavBar />
       <PageWrapper>
-        <Masthead />
-        <Features />
+        <ListAccount openPopupTransafer={openPopupTransafer} />
       </PageWrapper>
     </>
   );
-}
+};
