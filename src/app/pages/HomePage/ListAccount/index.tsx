@@ -1,7 +1,7 @@
 import keyring from '@polkadot/ui-keyring';
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Icon, Table, TableHeader, Wrapper } from './elements';
+import { Icon, NoData, Table, TableHeader, Wrapper } from './elements';
 import { Account, ListAcountProps } from './type';
 import Balance from 'app/components/Balance';
 import Button from 'app/components/Button';
@@ -69,22 +69,31 @@ const ListAccount = (props: ListAcountProps) => {
       </tr>
     ));
   };
+  const renderContent = () => {
+    if (listDataDisplay && listDataDisplay.length > 0) {
+      return (
+        <Table>
+          <tbody>
+            <TableHeader>
+              <td>ADDRESS</td>
+              <td>NAME</td>
+              <td>TYPE</td>
+              <td>BALANCES</td>
+              <td></td>
+            </TableHeader>
+            {tableData()}
+          </tbody>
+        </Table>
+      );
+    } else {
+      return <NoData>There no data</NoData>;
+    }
+  };
 
   return (
     <Wrapper>
       <Button onClickFunction={addAccount}>ADD ACCOUNT</Button>
-      <Table>
-        <tbody>
-          <TableHeader>
-            <td>ADDRESS</td>
-            <td>NAME</td>
-            <td>TYPE</td>
-            <td>BALANCES</td>
-            <td></td>
-          </TableHeader>
-          {tableData()}
-        </tbody>
-      </Table>
+      {renderContent()}
     </Wrapper>
   );
 };

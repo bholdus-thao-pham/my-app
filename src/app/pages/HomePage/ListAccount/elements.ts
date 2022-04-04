@@ -1,4 +1,4 @@
-import { styled } from '@stitches/react';
+import { styled } from 'styles/stitches.config';
 
 export const Wrapper = styled('div', {});
 
@@ -41,4 +41,8 @@ export const TableHeader = styled('tr', {
   fontWeight: 'bold',
   backgroundColor: '#c0005c',
   borderRadius: 10,
+});
+
+export const NoData = styled('h3', {
+  color: '$secondPink',
 });
