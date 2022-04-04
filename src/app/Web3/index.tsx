@@ -1,26 +1,14 @@
 import { WsProvider, ApiPromise } from '@polkadot/api';
 import React, { useEffect, useState } from 'react';
 import { Web3State } from './type';
-
-import { settings } from '@polkadot/ui-settings';
-import { defaults as addressDefaults } from '@polkadot/util-crypto/address/defaults';
 import { keyring } from '@polkadot/ui-keyring';
-import type { ChainProperties, ChainType } from '@polkadot/types/interfaces';
-import { cryptoWaitReady, mnemonicGenerate } from '@polkadot/util-crypto';
+import type { ChainType } from '@polkadot/types/interfaces';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
 
-import { formatBalance, isTestChain } from '@polkadot/util';
-import registry from './typeRegistry';
-import { LoadingIndicator } from 'app/components/LoadingIndicator';
+import { isTestChain } from '@polkadot/util';
 import PageLoading from 'app/components/PageLoading';
 
 let api: ApiPromise;
-function isKeyringLoaded() {
-  try {
-    return !!keyring.keyring;
-  } catch {
-    return false;
-  }
-}
 interface ChainData {
   // properties: ChainProperties;
   name: string;
@@ -50,7 +38,7 @@ async function retrieveChain(api: ApiPromise): Promise<ChainData> {
 }
 
 async function loadOnReady(api: ApiPromise): Promise<Web3State> {
-  const { name, type, chain, version } = await retrieveChain(api);
+  const { type, chain } = await retrieveChain(api);
   const isDevelopment =
     type.isDevelopment || type.isLocal || isTestChain(chain);
 
