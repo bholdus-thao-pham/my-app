@@ -27,6 +27,7 @@ const ButtonWrapper = styled('button', {
   color: '$lightPink',
   background: 'none',
   borderRadius: 3,
+  margin: '8px 0',
   outline: 'none',
   '&.none-border': {
     border: 'none',
@@ -36,7 +37,7 @@ const ButtonWrapper = styled('button', {
     background: '$hoverBackground',
   },
   '& + button': {
-    margin: '8px 16px',
+    marginLeft: 8,
   },
   variants: {
     isDisabled: {

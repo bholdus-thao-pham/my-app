@@ -1,4 +1,4 @@
-import keyring, { Keyring } from '@polkadot/ui-keyring';
+import keyring from '@polkadot/ui-keyring';
 import Button from 'app/components/Button';
 import Icon from 'app/components/Icon';
 import Input from 'app/components/Input';
@@ -42,12 +42,18 @@ const TransferStep2 = (props: TransferStep2Props) => {
           type="password"
           name="password"
           label="Password"
+          require={true}
+          isValid={password.trim() !== ''}
           value={password}
           onChange={changePass}
         />
       </Wrapper>
       <WrapperFooter>
-        <Button onClickFunction={nextStepHandler} className="none-border">
+        <Button
+          onClickFunction={nextStepHandler}
+          className="none-border"
+          isDisabled={!password}
+        >
           Next
           <Icon src={nextIconSrc} alt={'Close icon'} />
         </Button>

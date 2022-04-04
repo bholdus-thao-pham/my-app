@@ -68,10 +68,12 @@ const ConfirmSeed = (props: ConfirmSeedProps) => {
 export default ConfirmSeed;
 
 const SelectedSeed = styled('div', {
-  height: 100,
+  height: 'auto',
+  minHeight: 100,
   background: '#cbc6c62e',
   borderRadius: 3,
   marginBottom: 10,
+  padding: 8,
 });
 
 const Wrapper = styled('div', {

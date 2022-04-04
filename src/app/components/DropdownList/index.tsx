@@ -97,12 +97,15 @@ const Lable = styled('label', {
 });
 const Selector = styled('input', {
   width: '100%',
+  height: '100%',
   padding: 8,
   paddingRight: '16px',
   color: 'white',
   background: '$lightGrayBackground',
   border: 'none',
   outline: 'none',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 });
 
 const OptionWrapper = styled('ul', {
